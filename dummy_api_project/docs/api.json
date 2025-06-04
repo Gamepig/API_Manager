@@ -1,0 +1,56 @@
+{
+  "project_A": {
+    "python-api": {
+      "description": "Python Flask 範例 API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Python",
+      "port": "8001"
+    },
+    "php-api": {
+      "description": "PHP 內建伺服器範例 API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team PHP",
+      "port": "8002"
+    }
+  },
+  "project_B": {
+    "go-api": {
+      "description": "Go Lang HTTP 伺服器範例 API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Go",
+      "port": "8003"
+    },
+    "dummy-api-1": {
+      "description": "第一個模擬 Node.js API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Node",
+      "port": "3001"
+    },
+    "dummy-api-2": {
+      "description": "第二個模擬 Node.js API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Node",
+      "port": "3002"
+    },
+    "dummy-api-3": {
+      "description": "第三個模擬 Node.js API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Node",
+      "port": "3003"
+    }
+  },
+  "project_C": {
+    "dummy-api-4": {
+      "description": "第四個模擬 Node.js API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Node",
+      "port": "3004"
+    },
+    "dummy-api-5": {
+      "description": "第五個模擬 Node.js API。",
+      "version": "1.0.0",
+      "maintainer": "Dev Team Node",
+      "port": "3005"
+    }
+  }
+} 

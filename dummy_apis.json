@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "name": "dummy-api-1",
+      "script": "dummy_api.js",
+      "args": ["--port", "3001"],
+      "interpreter": "node",
+      "cwd": "/Users/gamepig/projects/API_Manager",
+      "watch": false
+    },
+    {
+      "name": "dummy-api-2",
+      "script": "dummy_api.js",
+      "args": ["--port", "3002"],
+      "interpreter": "node",
+      "cwd": "/Users/gamepig/projects/API_Manager",
+      "watch": false
+    },
+    {
+      "name": "dummy-api-3",
+      "script": "dummy_api.js",
+      "args": ["--port", "3003"],
+      "interpreter": "node",
+      "cwd": "/Users/gamepig/projects/API_Manager",
+      "watch": false
+    },
+    {
+      "name": "dummy-api-4",
+      "script": "dummy_api.js",
+      "args": ["--port", "3004"],
+      "interpreter": "node",
+      "cwd": "/Users/gamepig/projects/API_Manager",
+      "watch": false
+    },
+    {
+      "name": "dummy-api-5",
+      "script": "dummy_api.js",
+      "args": ["--port", "3005"],
+      "interpreter": "node",
+      "cwd": "/Users/gamepig/projects/API_Manager",
+      "watch": false
+    }
+  ]
+} 

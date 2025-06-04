@@ -1,0 +1,15 @@
+{
+  "apps": [
+    {
+      "name": "php-api",
+      "script": "php",
+      "args": [
+        "-S",
+        "localhost:8002",
+        "php_api.php"
+      ],
+      "interpreter": "none",
+      "watch": false
+    }
+  ]
+} 

@@ -1,0 +1,93 @@
+/* src/styles.qss */
+
+QMainWindow {
+    background-color: rgba(40, 40, 40, 0.9); /* 深色背景，略帶透明度 */
+    color: #F0F0F0; /* 白色文字 */
+}
+
+QWidget {
+    background-color: rgba(50, 50, 50, 0.8); /* 略淺的背景，帶透明度 */
+    color: #F0F0F0;
+    border-radius: 5px; /* 圓角 */
+}
+
+QLabel {
+    color: #F0F0F0;
+}
+
+QPushButton {
+    background-color: #6200EE; /* 鮮豔的紫色 */
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #7C4DFF; /* 懸停效果 */
+}
+
+QPushButton:pressed {
+    background-color: #3700B3; /* 按下效果 */
+}
+
+QTreeWidget {
+    background-color: rgba(30, 30, 30, 0.7); /* 更深的透明背景 */
+    color: #F0F0F0;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    selection-background-color: rgba(98, 0, 238, 0.4); /* 選取背景色 (紫色強調) */
+    selection-color: #FFFFFF; /* 選取文字顏色 */
+}
+
+QTreeWidget::item {
+    padding: 5px;
+}
+
+QTreeWidget::item:selected {
+    background-color: rgba(98, 0, 238, 0.4);
+    color: #FFFFFF;
+}
+
+QHeaderView::section {
+    background-color: #444444;
+    color: #F0F0F0;
+    padding: 5px;
+    border: 1px solid #666666;
+    border-radius: 3px;
+}
+
+ApiDetailPanel { /* 自定義組件可能需要明確的名稱 */
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid #666666;
+    border-radius: 5px;
+}
+
+PerformanceGraph { /* 自定義組件可能需要明確的名稱 */
+    background-color: rgba(30, 30, 30, 0.7);
+    border: 1px solid #666666;
+    border-radius: 5px;
+}
+
+/* 針對 ApiStatusLight 內部 QLabel 的樣式 */
+ApiStatusLight QLabel {
+    color: #F0F0F0;
+    font-weight: bold;
+}
+
+/* 針對圓餅圖的標題 */
+QChart {
+    title-color: #F0F0F0;
+    background: transparent; /* 背景透明 */
+}
+
+QChartView {
+    background: transparent; /* 背景透明 */
+}
+
+QPieSeries {
+    /* 圓餅圖的切片顏色將由代碼設置，QSS 主要用於標籤 */
+    label-color: #F0F0F0;
+    label-font: bold;
+} 

@@ -2,6 +2,30 @@
 
 本文件將根據規劃書，將 PM2 API 管理頁面的開發流程劃分為幾個主要階段，並詳細列出每個階段的子步驟，同時整合 Git 版本控制與 CI/CD 設定。
 
+---
+
+## 主要開發階段：
+
+*   [1. 環境設定與專案初始化](01_Environment_Setup.md)
+*   [2. 後端核心功能開發](02_Backend_Development.md)
+*   [3. 前端 GUI 開發](03_Frontend_GUI_Development.md)
+*   [4. 測試](04_Testing.md)
+*   [X] [5. 文件與維護](05_Documentation_and_Maintenance.md)
+*   [X] [6. 版本控制與持續整合/部署 (CI/CD)](06_CI_CD_Setup.md)
+*   [ ] [7. 待辦事項 (TBD)](07_ToDo.md)
+
+---
+
+**重要提示：PM2 全局安裝**
+
+在開始開發之前，請確保您的系統上已全局安裝 PM2。如果尚未安裝，請執行以下命令：
+
+```bash
+npm install pm2 -g
+```
+
+這將確保 PM2 命令在任何路徑下都可執行，方便後續的 PM2 交互操作。
+
 ## 1. 環境設定與專案初始化
 
 ### 1.1 建立專案目錄結構
