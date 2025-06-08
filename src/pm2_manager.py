@@ -92,14 +92,14 @@ def start_api(name_or_id):
     """
     try:
         command = ["pm2", "start", str(name_or_id)]
-        subprocess.run(command, capture_output=True, text=True, check=True)
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
         print(f"成功啟動 API: {name_or_id}")
         return True
     except FileNotFoundError:
         print("錯誤：PM2 命令未找到。請確認 PM2 已全局安裝。")
         return False
     except subprocess.CalledProcessError as e:
-        print(f"錯誤：啟動 API {name_or_id} 失敗。錯誤訊息：{e.stderr}")
+        print(f"錯誤：執行 PM2 命令失敗。錯誤訊息：{e.stderr.strip()}")
         return False
     except Exception as e:
         print(f"啟動 API {name_or_id} 時發生未知錯誤：{e}")
@@ -117,14 +117,14 @@ def restart_api(name_or_id):
     """
     try:
         command = ["pm2", "restart", str(name_or_id)]
-        subprocess.run(command, capture_output=True, text=True, check=True)
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
         print(f"成功重啟 API: {name_or_id}")
         return True
     except FileNotFoundError:
         print("錯誤：PM2 命令未找到。請確認 PM2 已全局安裝。")
         return False
     except subprocess.CalledProcessError as e:
-        print(f"錯誤：重啟 API {name_or_id} 失敗。錯誤訊息：{e.stderr}")
+        print(f"錯誤：重啟 API {name_or_id} 失敗。錯誤訊息：{e.stderr.strip()}")
         return False
     except Exception as e:
         print(f"重啟 API {name_or_id} 時發生未知錯誤：{e}")
@@ -142,14 +142,14 @@ def stop_api(name_or_id):
     """
     try:
         command = ["pm2", "stop", str(name_or_id)]
-        subprocess.run(command, capture_output=True, text=True, check=True)
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
         print(f"成功停止 API: {name_or_id}")
         return True
     except FileNotFoundError:
         print("錯誤：PM2 命令未找到。請確認 PM2 已全局安裝。")
         return False
     except subprocess.CalledProcessError as e:
-        print(f"錯誤：停止 API {name_or_id} 失敗。錯誤訊息：{e.stderr}")
+        print(f"錯誤：停止 API {name_or_id} 失敗。錯誤訊息：{e.stderr.strip()}")
         return False
     except Exception as e:
         print(f"停止 API {name_or_id} 時發生未知錯誤：{e}")

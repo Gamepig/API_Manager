@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('QtAgg')  # 確保 Matplotlib 使用 PyQt6 後端
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtCore import Qt, QSize, pyqtSignal
 from PyQt6.QtWidgets import (
     QLabel, QWidget, QTableWidget, QVBoxLayout, QHBoxLayout, QHeaderView,
     QTableWidgetItem, QMessageBox, QPushButton
@@ -170,12 +170,15 @@ class ApiDetailPanel(QWidget):
         layout (QVBoxLayout): 面板的主佈局管理器。
         info_labels (dict): 儲存各資訊標籤的字典。
         current_api_id (str): 當前顯示的 API 的 PM2 ID。
+        current_api_name (str): 當前顯示的 API 的名稱。
         refresh_callback (callable): 用於刷新應用程式數據的回調函數。
         labels_data (dict): 定義顯示文本和對應 API 數據鍵路徑的字典。
         start_button (QPushButton): 啟動 API 按鈕。
         restart_button (QPushButton): 重啟 API 按鈕。
         stop_button (QPushButton): 停止 API 按鈕。
     """
+    single_api_action_requested = pyqtSignal(object, str, str, str) # action_func, api_id, api_name, action_type
+
     def __init__(self, parent=None, refresh_callback=None):
         """
         初始化 ApiDetailPanel。
@@ -188,6 +191,7 @@ class ApiDetailPanel(QWidget):
         self.layout = QVBoxLayout(self)
         self.info_labels = {}
         self.current_api_id = None  # Store the pm_id of the currently displayed API
+        self.current_api_name = None # Store the name of the currently displayed API
         self.refresh_callback = refresh_callback  # Store the callback function
         self.labels_data = {
             "名稱": "name",
@@ -229,7 +233,7 @@ class ApiDetailPanel(QWidget):
 
         self.layout.addStretch(1)
 
-        # Connect buttons (will be connected in update_detail if API is selected)
+        # Connect buttons
         self.start_button.clicked.connect(self._start_api)
         self.restart_button.clicked.connect(self._restart_api)
         self.stop_button.clicked.connect(self._stop_api)
@@ -244,9 +248,11 @@ class ApiDetailPanel(QWidget):
         self.clear_detail()
         if not api_data:
             self.current_api_id = None
+            self.current_api_name = None
             return
 
         self.current_api_id = api_data.get('pm_id')  # Store the current API ID
+        self.current_api_name = api_data.get('name') # Store the current API name
 
         # Use labels_data to iterate
         for display_text, key_path in self.labels_data.items():
@@ -266,6 +272,7 @@ class ApiDetailPanel(QWidget):
         清除面板上顯示的所有 API 詳細資訊，並將其重置為 "N/A"。
         """
         self.current_api_id = None
+        self.current_api_name = None
         for display_text, key_path in self.labels_data.items():
             label = self.info_labels[key_path]
             label.setText(f"{display_text}: N/A")
@@ -273,41 +280,35 @@ class ApiDetailPanel(QWidget):
     def _start_api(self):
         """
         處理啟動 API 按鈕的點擊事件。
-        根據 current_api_id 啟動 API。
+        發射信號以在獨立線程中啟動 API。
         """
-        if self.current_api_id:
+        if self.current_api_id is not None:
+            print(f"DEBUG: ApiDetailPanel._start_api - ID: {self.current_api_id}, Name: {self.current_api_name}") # 診斷用
             QMessageBox.information(self, "啟動 API",
-                                    f"正在啟動 API: {self.current_api_id}")
-            if self.refresh_callback:
-                # 非同步執行啟動操作
-                pm2_manager.start_api(self.current_api_id)
-                self.refresh_callback()  # 刷新數據
+                                    f"正在啟動 API: {self.current_api_name} (ID: {self.current_api_id})")
+            self.single_api_action_requested.emit(pm2_manager.start_api, str(self.current_api_id), self.current_api_name, "啟動")
 
     def _restart_api(self):
         """
         處理重啟 API 按鈕的點擊事件。
-        根據 current_api_id 重啟 API。
+        發射信號以在獨立線程中重啟 API。
         """
-        if self.current_api_id:
+        if self.current_api_id is not None:
+            print(f"DEBUG: ApiDetailPanel._restart_api - ID: {self.current_api_id}, Name: {self.current_api_name}") # 診斷用
             QMessageBox.information(self, "重啟 API",
-                                    f"正在重啟 API: {self.current_api_id}")
-            if self.refresh_callback:
-                # 非同步執行重啟操作
-                pm2_manager.restart_api(self.current_api_id)
-                self.refresh_callback()  # 刷新數據
+                                    f"正在重啟 API: {self.current_api_name} (ID: {self.current_api_id})")
+            self.single_api_action_requested.emit(pm2_manager.restart_api, str(self.current_api_id), self.current_api_name, "重啟")
 
     def _stop_api(self):
         """
         處理停止 API 按鈕的點擊事件。
-        根據 current_api_id 停止 API。
+        發射信號以在獨立線程中停止 API。
         """
-        if self.current_api_id:
+        if self.current_api_id is not None:
+            print(f"DEBUG: ApiDetailPanel._stop_api - ID: {self.current_api_id}, Name: {self.current_api_name}") # 診斷用
             QMessageBox.information(self, "停止 API",
-                                    f"正在停止 API: {self.current_api_id}")
-            if self.refresh_callback:
-                # 非同步執行停止操作
-                pm2_manager.stop_api(self.current_api_id)
-                self.refresh_callback()  # 刷新數據
+                                    f"正在停止 API: {self.current_api_name} (ID: {self.current_api_id})")
+            self.single_api_action_requested.emit(pm2_manager.stop_api, str(self.current_api_id), self.current_api_name, "停止")
 
 
 class PerformanceGraph(QWidget):
